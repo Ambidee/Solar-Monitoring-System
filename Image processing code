@@ -1,0 +1,47 @@
+clc
+clear all;
+close all;
+
+%loading image into matlab workspace
+rgb=imread('TI_5.jpg');
+figure('Name','rgb picture','NumberTitle','off'),imshow(rgb)
+
+%applying a grayscale filter
+gray=rgb2gray(rgb);
+figure('Name','gray picture','NumberTitle','off'),imshow(gray)
+
+%applying a binary filter
+BW=imbinarize(gray);
+figure('Name','binary picture','NumberTitle','off'), imshow(BW)
+
+%for mean filter
+MF=fspecial('average',[3 3]);
+MF_2=imfilter(gray,MF);
+figure('Name','mean filter applied','NumberTitle','off'), imshow(MF_2)
+
+%median filter
+ME=medfilt2(gray);
+figure('Name','median filter applied','NumberTitle','off'), imshow(ME)
+
+%gaussian filter
+GF=imgaussfilt(gray,2);
+figure('Name','gaussian filter applied','NumberTitle','off'), imshow(GF)
+
+
+%3-D mean filter
+img = im2double(imread('TI_5.jpg'));
+img_gray = rgb2gray(img);
+MF=fspecial('average',[3 3]);
+MF_3=imfilter(img_gray,MF);
+figure('Name','3-D mean filter','NumberTitle','off'),surf(MF_3)
+shading interp
+
+%3-D median filter
+ME3=medfilt2(img_gray);
+figure('Name','3-D median filter','NumberTitle','off'),surf(ME3)
+shading interp
+
+%3-D Gaussian filter
+GF3=imgaussfilt(img_gray);
+figure('Name','3-D gaussian filter applied','NumberTitle','off'), surf(GF3)
+shading interp
